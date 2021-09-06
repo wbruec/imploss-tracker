@@ -9,12 +9,30 @@
   </head>
 
   <body>
+    coin 1:
+    <div id="myData"></div>
+    <header></header>
     <main id="app">
-      tbd coin list asdfss
-      another line
-      <!--App-->
-      and another line
+      <script>
+        const header = document.querySelector("header");
+        let requestURL =
+          "https://api.coingecko.com/api/v3/simple/price?ids=cardano&vs_currencies=eur";
+        let request = new XMLHttpRequest();
+        request.open("GET", requestURL);
+        request.responseType = "json";
+        request.send();
+
+        request.onload = function () {
+          const coin1 = request.response;
+          populateHeader(coin1);
+        };
+
+        function populateHeader(obj) {
+          const myH1 = document.createElement("h1");
+          myH1.textContent = obj["cardano"]["eur"];
+          header.appendChild(myH1);
+        }
+      </script>
     </main>
-    <script src="app.js"></script>
   </body>
 </html>
